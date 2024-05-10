@@ -33,5 +33,8 @@ jobs:
                 username: ec2-user
                 key: ${{ secrets.SSH_KEY }}
                 script: |
-                    docker stop dabbu || true
-                    docker run -d --rm -p 80:80 --name dabbu agarwalprashant355/node-example-1:2.0
+                    # Commands to execute on the EC2 instance
+                    ls -lah
+                    whoami
+                    # docker stop dabbu || true
+                    # docker run -d --rm -p 80:80 --name dabbu agarwalprashant355/node-example-1:2.0
