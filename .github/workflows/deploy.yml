@@ -30,13 +30,13 @@ jobs:
           env:
             PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
             HOSTNAME: ${{ secrets.SSH_HOST }}
-            USER_NAME: ${{secrets.USER_NAME}}
-            # USER: ec2-user 
+            USER: ec2-user 
           run: | 
-            echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-            ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} "hostname && ls -lah && whoami"
-            # chmod 400 key.pem
-            # ssh -o StrictHostKeyChecking=no -i key.pem ${USER@$HOST "hostname && ls -lah && whoami" 
+            echo "$PRIVATE_KEY" > key.pem
+            echo "The EC2 Host is: $HOST"
+            chmod 400 key.pem
+            
+            ssh -o StrictHostKeyChecking=no-i key.pem $USER@$HOST "hostname && ls -lah && whoami" 
 
         # - name: Deploy to EC2
         #   uses: appleboy/ssh-action@master
