@@ -34,7 +34,7 @@ jobs:
           run: | 
             echo "$PRIVATE_KEY" > key.pem
             echo "The EC2 Host is: $HOST"
-            chmod 400 key.pem
+            chmod 600 key.pem
             
             ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "hostname && ls -lah && whoami" 
 
