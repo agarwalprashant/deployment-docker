@@ -37,7 +37,7 @@ jobs:
             chmod 400 key.pem
             
             ssh -o StrictHostKeyChecking=no -i key.pem $USER_NAME@$HOSTNAME "hostname && ls -lah && whoami"
-            docker stop dabbu || true
+            # docker stop dabbu || true
             docker run -d --rm -p 80:80 --name dabbu agarwalprashant355/node-example-1:2.0
 
         # - name: Deploy to EC2
