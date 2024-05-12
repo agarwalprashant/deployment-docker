@@ -31,12 +31,14 @@ jobs:
             PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
             HOSTNAME: ${{ secrets.SSH_HOST }}
             USER_NAME: ec2-user 
-          run: | 
+          run: |
             echo "$PRIVATE_KEY" > key.pem
             echo "The EC2 Host is: $HOST"
             chmod 400 key.pem
             
-            ssh -i key.pem $USER_NAME@$HOSTNAME "hostname && ls -lah && whoami" 
+            ssh -o StrictHostKeyChecking=no -i key.pem $USER_NAME@$HOSTNAME "hostname && ls -lah && whoami"
+            docker stop dabbu || true
+            docker run -d --rm -p 80:80 --name dabbu agarwalprashant355/node-example-1:2.0
 
         # - name: Deploy to EC2
         #   uses: appleboy/ssh-action@master
